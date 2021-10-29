@@ -60,3 +60,5 @@ cat eval_segments.csv | bash download.sh valid
 ```bash
 jupyter notebook
 ```
+
+Select `music` kernel in the jupyter notebook.
