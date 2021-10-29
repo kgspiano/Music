@@ -32,6 +32,29 @@ To enable gpu usage, install gpu version `torch` package from [PyTorch](https://
 
 ## Download AudioSet data
 
+Install `youtube-dl` to download AudioSet.
+
+MacOS users can install with homebrew:
+```bash
+brew install youtube-dl
+```
+
+Ubuntu users can install with pip3:
+```bash
+sudo pip3 install youtube-dl
+```
+
+After `youtube-dl` installation, download AudioSet:
+```bash
+cd data/AudioSet
+wget http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/balanced_train_segments.csv
+wget http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/eval_segments.csv
+wget http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_labels_indices.csv
+
+cat balanced_train_segments.csv | bash download.sh train
+cat eval_segments.csv | bash download.sh valid
+```
+
 ## Quickstart
 
 ```bash
