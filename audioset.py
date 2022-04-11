@@ -68,7 +68,7 @@ class AudioSet(VisionDataset):
     
 # AudioSet2 : option - delete data with some label
 class AudioSet2(VisionDataset):
-    def __init__(self, root, transform = None, target_transform = None, train=True, deleteidx = None):
+    def __init__(self, root, transform = None, target_transform = None, train=True, deleteidx = None, deleteid = None):
         super(AudioSet2, self).__init__(root, transform=transform,
                                             target_transform=target_transform)
         self.train = train
@@ -118,6 +118,18 @@ class AudioSet2(VisionDataset):
             self.paths = tmp
             self.targets = tmp2
         
+        if deleteid is not None:
+            tmp = []
+            tmp2 = []
+            for idx, idtmp in enumerate(self.paths):
+                if not (idtmp in deleteid):
+                    tmp.append(self.paths[idx])
+                    tmp2.append(self.targets[idx])
+            self.paths = tmp
+            self.targets = tmp2  
+                
+                
+                
         _idx2class = {}
         for row in _class_labels_indices[['index', 'display_name']].iterrows():
             _idx2class[row[1]['index']] = row[1]['display_name']
@@ -143,7 +155,7 @@ class AudioSet2(VisionDataset):
     
 # AudioSet_shuffle : randomly shuffle label
 class AudioSet_shuffle(VisionDataset):
-    def __init__(self, root, transform = None, target_transform = None, train=True, deleteidx = None):
+    def __init__(self, root, transform = None, target_transform = None, train=True, deleteidx = None, deleteid = None):
         super(AudioSet_shuffle, self).__init__(root, transform=transform,
                                             target_transform=target_transform)
         self.train = train
@@ -193,7 +205,17 @@ class AudioSet_shuffle(VisionDataset):
 
             self.paths = tmp
             self.targets = tmp2
-
+        
+        if deleteid is not None:
+            tmp = []
+            tmp2 = []
+            for idx, idtmp in enumerate(self.paths):
+                if not (idtmp in deleteid):
+                    tmp.append(self.paths[idx])
+                    tmp2.append(self.targets[idx])
+            self.paths = tmp
+            self.targets = tmp2  
+            
         for i, t in enumerate(self.targets):
             t[:] = np.random.randint(527, size = len(t))
 
@@ -300,3 +322,8 @@ class AudioSet3(VisionDataset):
     
     def __len__(self):
         return len(self.paths)
+    
+    
+    
+    
+    
