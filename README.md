@@ -41,6 +41,8 @@ wget http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_label
 ```
 In these .csv files, there are URL links for each audio clip.
 
+filenames.xlsx contains the names of the data that were additionally removed from the data in the training without music condition (data that is likely missing music labels).
+
 ## Quickstart
 
 ```bash
